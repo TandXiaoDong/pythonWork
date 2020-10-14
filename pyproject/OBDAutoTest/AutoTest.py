@@ -4,6 +4,7 @@ import TaskWin as tw
 import threading
 import time
 import os
+import datetime
 
 clr.FindAssembly("OBDAutoTestAPI.dll")
 clr.AddReference('OBDAutoTestAPI')
@@ -33,7 +34,8 @@ def ReadCANFault():
         codeStr = ""
         for code in faultCodeList:
             codeStr = codeStr + code + " "
-        print("【普通故障码】", codeStr)
+        tm = datetime.datetime.now()
+        print(tm, "【普通故障码】", codeStr)
     if Is_Read_Forever_Fault_Code == True:
         faultCodeList = mode.ReadResultModeA(True)
         strCode = ""
@@ -71,6 +73,7 @@ def ReadMode1():
     list = mode.ReadResultMode1(True)
     for result in list:
         print(result)
+
 def ReadMode2():
     list = mode.ReadResultMode2(True)
     for result in list:
@@ -404,10 +407,12 @@ def OBDAutoTestTask():
                 fun_id = fun_id + 1
         except Exception as err:
             tw.IsStop = 0
+            CloseCAN()
             print("ERROR Line：", err.__traceback__.tb_lineno)
             print("Err Info:", err)
             break
         time.sleep(1)
+
 def MainAutoTestTask():
     task1 = threading.Thread(target=AutoWinTask)
     task1.start()
@@ -416,7 +421,7 @@ def MainAutoTestTask():
     task2.join()
 
 def TestOBD():
-    for i in range(2):
+    for i in range(20):
         SetShortCircuit()
         SetLinNode() #读取故障码减少了
         # SetSensorOffset()
@@ -425,8 +430,8 @@ def TestOBD():
         # ClearMode7Fault()
         # ReadCANFault()
         time.sleep(0.1)
-TestOBD()
-# MainAutoTestTask()
+# TestOBD()
+MainAutoTestTask()
 CloseCAN()
 
 
