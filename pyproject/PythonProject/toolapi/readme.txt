@@ -1,1 +1,0 @@
-This directory and its subdirectories contain the java classes that are responsible for the Application Procedural Interface (API).
