@@ -16,7 +16,6 @@ from OBDAutoTestAPI.OBDMode import  *
 Is_Read_Fault_Code = True
 Is_Read_Forever_Fault_Code = True
 
-
 def UpdateWinParams(tipInfo, timeMax, engSpeed, carSpeed, load, tempera):
     tw.timeMaxss = timeMax
     tw.taskInfo = tipInfo
@@ -411,7 +410,7 @@ def OBDAutoTestTask():
             print("ERROR Line：", err.__traceback__.tb_lineno)
             print("Err Info:", err)
             break
-        time.sleep(1)
+        time.sleep(3)
 
 def MainAutoTestTask():
     task1 = threading.Thread(target=AutoWinTask)
@@ -421,7 +420,7 @@ def MainAutoTestTask():
     task2.join()
 
 def TestOBD():
-    for i in range(20):
+    for i in range(1):
         SetShortCircuit()
         SetLinNode() #读取故障码减少了
         # SetSensorOffset()
@@ -431,7 +430,8 @@ def TestOBD():
         # ReadCANFault()
         time.sleep(0.1)
 # TestOBD()
-MainAutoTestTask()
+ReadMode7()
+# MainAutoTestTask()
 CloseCAN()
 
 
