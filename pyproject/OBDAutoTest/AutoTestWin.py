@@ -99,8 +99,14 @@ def CreateRow6Params():
     lbx_p2.pack(side=tk.RIGHT)
 
 def StartTestThread():
-    threading.Thread(target=DefineTestContent).start()
-    threading.Thread(target=StartTimer).start()
+    thread1 =threading.Thread(target=DefineTestContent)
+    thread1.setDaemon(True)
+    thread1.start()
+
+    thread2 = threading.Thread(target=StartTimer)
+    thread2.setDaemon(True)
+    thread2.start()
+
 
 def StartTimer():
     try:
@@ -161,6 +167,7 @@ def SetRow5Info(tips, value):
 def SetRow6Info(tips, value):
     tk_r6_p1.set(tips)
     tk_r6_p2.set(value)
+
 def SetViewParams(taskInfo, r2_tips, r2_val, r3_tips, r3_val, r4_tips, r4_val, r5_tips, r5_val, r6_tips, r6_val):
     SetStartTaskFlags()
     SetRow1Info(taskInfo)
@@ -169,6 +176,7 @@ def SetViewParams(taskInfo, r2_tips, r2_val, r3_tips, r3_val, r4_tips, r4_val, r
     SetRow4Info(r4_tips, r4_val)
     SetRow5Info(r5_tips, r5_val)
     SetRow6Info(r6_tips, r6_val)
+
 def SetStartTaskFlags():
     winEnty.timerCount = 0  # 每一个任务结束完成后timerCount设置为0清空计数
     winEnty.stopFlag = 1#开始测试时，stopFlag设置为1开始计数
