@@ -21,15 +21,20 @@ class IncaCtl():
             # Get Top-Folder
             # Top-Folder has to be referenced by the database object.
             self.oSF = self.oDB.GetFolder(TOPFOLDER)
+            print("osf", isinstance(self.oSF))
             # Get Experiment-Item from Database  (EE object)
             self.oEE = self.oSF.GetComponent(EXPERIMENT)
+            print("oEE", type(self.oEE))
             # Get Workspace-Item from Database (WS object)
             self.oWS = self.oSF.GetComponent(WORKSPACE)
+            print("oWS", type(self.oWS))
             # if(self.oINCA.GetOpenedExperimentView() == False):
             # Open Experiment and get Experiment-View
             self.oOE = self.oEE.OpenExperiment()
+            print("oOE", type(self.oOE))
             # Get reference to open experiment
             self.oExp = self.oOE.GetExperiment()
+            print("oExp", type(self.oExp))
             self.oExpV = self.oINCA.GetOpenedExperimentView()
         else:
             self.oExpV = self.oINCA.GetOpenedExperimentView()
@@ -229,3 +234,5 @@ class IncaCtl():
             else:
                 out = out[:] + Read[IndexX:IndexX + 1]
         return out
+
+IncaCtl();

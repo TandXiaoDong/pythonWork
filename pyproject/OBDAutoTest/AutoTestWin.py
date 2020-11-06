@@ -24,13 +24,13 @@ root.geometry('+%d+%d' % (x, y))
 root.title("OBDAutoTest")
 
 frame1.pack(padx=100, pady=10)
-frame2.pack(padx=100, pady=10)
-frame3.pack(padx=100, pady=10)
-frame4.pack(padx=100, pady=10)
-frame5.pack(padx=100, pady=10)
-frame6.pack(padx=100, pady=10)
-frame7.pack(padx=100, pady=10)
-frame8.pack(padx=100, pady=10)
+frame2.pack(side=tk.TOP, padx=50, fill=tk.BOTH, expand=tk.YES)
+frame3.pack(side=tk.TOP, padx=50, pady=10, fill=tk.BOTH, expand=tk.YES)
+frame4.pack(side=tk.TOP, padx=50, pady=10, fill=tk.BOTH, expand=tk.YES)
+frame5.pack(sid=tk.TOP, padx=50, pady=10, fill=tk.BOTH, expand=tk.YES)
+frame6.pack(side=tk.TOP, padx=50, pady=10, fill=tk.BOTH, expand=tk.YES)
+frame7.pack(side=tk.TOP, padx=50, pady=10, fill=tk.BOTH, expand=tk.YES)
+frame8.pack(side=tk.TOP, padx=50, pady=10, fill=tk.BOTH, expand=tk.YES)
 winEnty = entity.UIEntity()
 
 tk_r1 = tk.StringVar()
@@ -48,6 +48,7 @@ tk_r7_p1 = tk.StringVar()
 tk_r7_p2 = tk.StringVar()
 tk_r8_timer = tk.StringVar()
 tk_r8_timer.set('00:00:00')
+tk_message = tk.StringVar()
 
 def UpdateUIParams():
     tk_r1.set(winEnty.get_r1())
@@ -63,6 +64,7 @@ def UpdateUIParams():
     tk_r6_p2.set(winEnty.get_r6_p2())
     tk_r7_p1.set(winEnty.get_r7_p1())
     tk_r7_p2.set(winEnty.get_r7_p2())
+    tk_message.set('message')
 
 def CreateRow1Title():
     label = tk.Label(frame1, textvariable = tk_r1, justify = tk.LEFT, fg='black', font=("微软雅黑", 12))
@@ -71,32 +73,37 @@ def CreateRow1Title():
 def CreateRow2Params():
     lbx_p1 = tk.Label(frame2, textvariable = tk_r2_p1, justify = tk.LEFT, fg='black', font=("微软雅黑", 12))
     lbx_p1.pack(side = tk.LEFT)
-    lbx_p2 = tk.Label(frame2, textvariable=tk_r2_p2, justify=tk.RIGHT, fg='blue', font=("微软雅黑", 12))
-    lbx_p2.pack(side=tk.RIGHT)
+
+    lbx_p2 = tk.Label(frame2, textvariable=tk_r2_p2, justify=tk.CENTER, fg='blue', font=("微软雅黑", 12))
+    lbx_p2.pack(side=tk.LEFT)
+
+    lbxMessage = tk.Label(frame2, textvariable=tk_message, justify=tk.CENTER, fg='green', font=("微软雅黑", 12))
+    lbxMessage.pack(side=tk.RIGHT)
+
 
 def CreateRow3Params():
     lbx_p1 = tk.Label(frame3, textvariable = tk_r3_p1, justify = tk.LEFT, fg='black', font=("微软雅黑", 12))
     lbx_p1.pack(side = tk.LEFT)
-    lbx_p2 = tk.Label(frame3, textvariable=tk_r3_p2, justify=tk.RIGHT, fg='blue', font=("微软雅黑", 12))
-    lbx_p2.pack(side=tk.RIGHT)
+    lbx_p2 = tk.Label(frame3, textvariable=tk_r3_p2, justify=tk.CENTER, fg='blue', font=("微软雅黑", 12))
+    lbx_p2.pack(side=tk.LEFT)
 
 def CreateRow4Params():
     lbx_p1 = tk.Label(frame4, textvariable = tk_r4_p1, justify = tk.LEFT, fg='black', font=("微软雅黑", 12))
     lbx_p1.pack(side = tk.LEFT)
-    lbx_p2 = tk.Label(frame4, textvariable=tk_r4_p2, justify=tk.RIGHT, fg='blue', font=("微软雅黑", 12))
-    lbx_p2.pack(side=tk.RIGHT)
+    lbx_p2 = tk.Label(frame4, textvariable=tk_r4_p2, justify=tk.CENTER, fg='blue', font=("微软雅黑", 12))
+    lbx_p2.pack(side=tk.LEFT)
 
 def CreateRow5Params():
     lbx_p1 = tk.Label(frame5, textvariable = tk_r5_p1, justify = tk.LEFT, fg='black', font=("微软雅黑", 12))
     lbx_p1.pack(side = tk.LEFT)
-    lbx_p2 = tk.Label(frame5, textvariable=tk_r5_p2, justify=tk.RIGHT, fg='blue', font=("微软雅黑", 12))
-    lbx_p2.pack(side=tk.RIGHT)
+    lbx_p2 = tk.Label(frame5, textvariable=tk_r5_p2, justify=tk.CENTER, fg='blue', font=("微软雅黑", 12))
+    lbx_p2.pack(side=tk.LEFT)
 
 def CreateRow6Params():
     lbx_p1 = tk.Label(frame6, textvariable = tk_r6_p1, justify = tk.LEFT, fg='black', font=("微软雅黑", 12))
     lbx_p1.pack(side = tk.LEFT)
-    lbx_p2 = tk.Label(frame6, textvariable=tk_r6_p2, justify=tk.RIGHT, fg='blue', font=("微软雅黑", 12))
-    lbx_p2.pack(side=tk.RIGHT)
+    lbx_p2 = tk.Label(frame6, textvariable=tk_r6_p2, justify=tk.CENTER, fg='blue', font=("微软雅黑", 12))
+    lbx_p2.pack(side=tk.LEFT)
 
 def StartTestThread():
     thread1 =threading.Thread(target=DefineTestContent)
@@ -131,12 +138,15 @@ def StartTimer():
         print(ex)
 
 def CreateTimerText():
-    lbx = tk.Label(frame8, textvariable=tk_r8_timer, justify=tk.RIGHT, fg='black', font=("微软雅黑", 13))
-    lbx.pack(side=tk.RIGHT)
+    lbx = tk.Label(frame7, textvariable=tk_r8_timer, justify=tk.LEFT, fg='black', font=("微软雅黑", 13))
+    lbx.pack(side=tk.LEFT)
 
-def CreateButton():
     btn = tk.Button(frame7, text='startTest', command=StartTestThread, fg='black', font=("微软雅黑", 10))
-    btn.pack()
+    btn.pack(side=tk.RIGHT)
+
+# def CreateButton():
+#     btn = tk.Button(frame7, text='startTest', command=StartTestThread, fg='black', font=("微软雅黑", 10))
+#     btn.pack()
 
 def StartAutoTest():
     UpdateUIParams()
@@ -146,7 +156,7 @@ def StartAutoTest():
     CreateRow4Params()
     CreateRow5Params()
     CreateRow6Params()
-    CreateButton()
+    # CreateButton()
     CreateTimerText()
     root.mainloop()
 
@@ -168,7 +178,7 @@ def SetRow6Info(tips, value):
     tk_r6_p1.set(tips)
     tk_r6_p2.set(value)
 
-def SetViewParams(taskInfo, r2_tips, r2_val, r3_tips, r3_val, r4_tips, r4_val, r5_tips, r5_val, r6_tips, r6_val):
+def SetViewParams(taskInfo, r2_tips, r2_val, r3_tips, r3_val, r4_tips, r4_val, r5_tips, r5_val, r6_tips, r6_val, message):
     SetStartTaskFlags()
     SetRow1Info(taskInfo)
     SetRow2Info(r2_tips, r2_val)
@@ -176,6 +186,7 @@ def SetViewParams(taskInfo, r2_tips, r2_val, r3_tips, r3_val, r4_tips, r4_val, r
     SetRow4Info(r4_tips, r4_val)
     SetRow5Info(r5_tips, r5_val)
     SetRow6Info(r6_tips, r6_val)
+    tk_message.set(message)
 
 def SetStartTaskFlags():
     winEnty.timerCount = 0  # 每一个任务结束完成后timerCount设置为0清空计数
