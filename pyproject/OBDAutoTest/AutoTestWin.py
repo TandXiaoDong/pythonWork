@@ -80,7 +80,6 @@ def CreateRow2Params():
     lbxMessage = tk.Label(frame2, textvariable=tk_message, justify=tk.CENTER, fg='green', font=("微软雅黑", 12))
     lbxMessage.pack(side=tk.RIGHT)
 
-
 def CreateRow3Params():
     lbx_p1 = tk.Label(frame3, textvariable = tk_r3_p1, justify = tk.LEFT, fg='black', font=("微软雅黑", 12))
     lbx_p1.pack(side = tk.LEFT)
@@ -114,7 +113,6 @@ def StartTestThread():
     thread2.setDaemon(True)
     thread2.start()
 
-
 def StartTimer():
     try:
         winEnty.timerCount = 0
@@ -129,6 +127,7 @@ def StartTimer():
                 else:
                     print('超时', tk_r2_p2.get())
                     winEnty.stopFlag = 0
+                    root.quit()
                 time.sleep(1)
             elif winEnty.stopFlag == 0:
                 time.sleep(1)
@@ -148,17 +147,35 @@ def CreateTimerText():
 #     btn = tk.Button(frame7, text='startTest', command=StartTestThread, fg='black', font=("微软雅黑", 10))
 #     btn.pack()
 
-def StartAutoTest():
-    UpdateUIParams()
-    CreateRow1Title()
-    CreateRow2Params()
-    CreateRow3Params()
-    CreateRow4Params()
-    CreateRow5Params()
-    CreateRow6Params()
-    # CreateButton()
-    CreateTimerText()
-    root.mainloop()
+class ShowMessageBox:
+    def __init__(self):
+        UpdateUIParams()
+        CreateRow1Title()
+        CreateRow2Params()
+        CreateRow3Params()
+        CreateRow4Params()
+        CreateRow5Params()
+        CreateRow6Params()
+        # CreateButton()
+        CreateTimerText()
+        self.count = 1
+        self.refreshUI()
+        root.mainloop()
+
+    def refreshUI(self):
+        self.count += 1
+        if len(str(self.count)) == 1:
+            print(0)
+            # self.tk_var3.set("0" + str(self.ctr))
+        else:
+            print(1)
+            # self.tk_var3.set(str(self.ctr))
+        # timeMaxss = int(self.timeOut.get())
+
+        if self.count <= 7:
+            root.after(1000, self.refreshUI)
+        elif self.count > 7:
+            root.destroy()
 
 def SetRow1Info(taskInfo):
     tk_r1.set(taskInfo)
@@ -191,16 +208,19 @@ def SetViewParams(taskInfo, r2_tips, r2_val, r3_tips, r3_val, r4_tips, r4_val, r
 def SetStartTaskFlags():
     winEnty.timerCount = 0  # 每一个任务结束完成后timerCount设置为0清空计数
     winEnty.stopFlag = 1#开始测试时，stopFlag设置为1开始计数
+
 def AllTaskCompled():
     winEnty.stopFlag = 0#最终测试完成后，stopFlag设置为0，结束循环
 
 def DefineTestContent():
     SetViewParams('start task0001', '超时时间', '10', 'enginSpeed', '23', 'carSpeed', '87', 'load', '3', 'temperature',
-                  '43')
+                  '43', 'mes1')
     time.sleep(4)
     SetViewParams('start task0001', 'outTime', '17', 'enginSpeed', '23', 'carSpeed', '87', 'load', '39', 'temperature',
-                  '49')
+                  '49', 'mes111')
     time.sleep(4)
     AllTaskCompled()
 
-StartAutoTest()
+
+ShowMessageBox()
+ShowMessageBox()

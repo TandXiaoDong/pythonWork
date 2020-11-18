@@ -151,7 +151,7 @@ def StartAutoTest():
     CreateRow6Params()
     CreateButton()
     CreateTimerText()
-    root.mainloop()
+    # root.mainloop()
 
 def SetRow1Info(taskInfo):
     tk_r1.set(taskInfo)
@@ -187,14 +187,27 @@ def AllTaskCompled():
     winEnty.stopFlag = 0#最终测试完成后，stopFlag设置为0，结束循环
 
 def DefineTestContent():
-    SetViewParams('start task0001', '超时时间', '10', 'enginSpeed', str(FIU.OBDGetEnginSpeed()), 'carSpeed', str(FIU.OBDGetCarSpeed()),
-                  'load', str(FIU.OBDGetEnginLoade()), 'temperature',str(FIU.OBDGetEnginTemperature()))
+    # SetViewParams('start task0001', '超时时间', '10', 'enginSpeed', str(FIU.OBDGetEnginSpeed()), 'carSpeed', str(FIU.OBDGetCarSpeed()),
+    #               'load', str(FIU.OBDGetEnginLoade()), 'temperature',str(FIU.OBDGetEnginTemperature()))
     # time.sleep(4)
-    # SetViewParams('start task0002', 'outTime', '17', 'enginSpeed', '23', 'carSpeed', '87', 'load', '39', 'temperature',
-    #               '49')
+    SetViewParams('start task0002', 'outTime', '17', 'enginSpeed', '23', 'carSpeed', '87', 'load', '39', 'temperature',
+                  '49')
     # time.sleep(4)
     AllTaskCompled()
 
 
-StartAutoTest()
+# StartAutoTest()
+
+def AutoShowDialog():
+    StartAutoTest()
+    root.mainloop()
+    for i in range(3):
+        time.sleep(1)
+    root.destroy()
+
+def OpenDialog():
+    AutoShowDialog()
+
+
+OpenDialog()
 

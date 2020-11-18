@@ -29,9 +29,9 @@ def AddOutTimeLabel(self):
     # self.yPosition += 5
     self.tbOutTime.place(x=lbxXPosition + 135, y=self.yPosition)
 
-    self.startBtn = tk.Button(self.win, text='start', comand=UpdateTestUI())
-    self.startBtn.pack()
-    self.startBtn.place(x=lbxXPosition + 200, y=self.yPosition)
+    # self.startBtn = tk.Button(self.win, text='start', comand=UpdateTestUI())
+    # self.startBtn.pack()
+    # self.startBtn.place(x=lbxXPosition + 200, y=self.yPosition)
 def AddRowParams(self):
     lbxEnginSpeed = tk.Label(self.win, text="发动机转速", fg='black', font=("微软雅黑", 16))
     lbxEnginSpeed.pack(side="left")
@@ -121,8 +121,8 @@ class UpdateLabel():
         AddRow4Label(self)
         AddRow5Label(self)
         AddTimerLable(self)
-        # self.updater()
-        self.timeOut.set(99)
+        self.updater()
+        self.timeOut.set(6)
 
         self.win.mainloop()
 
@@ -141,4 +141,4 @@ class UpdateLabel():
         elif IsStop == 0:
             self.win.destroy()
 
-# UpdateLabel()
+UpdateLabel()
