@@ -13,8 +13,67 @@ lbxXPosition = 100
 entryPosition = 70
 IsStop = 1
 
+# def StartTestThread():
+#     thread1 =threading.Thread(target=DefineTestContent)
+#     thread1.setDaemon(True)
+#     thread1.start()
+#
+#     thread2 = threading.Thread(target=StartTimer)
+#     thread2.setDaemon(True)
+#     thread2.start()
+#
+# def StartTimer():
+#     try:
+#         winEnty.timerCount = 0
+#         while True:
+#             if winEnty.stopFlag == 1:
+#                 if(winEnty.timerCount < int(tk_r2_p2.get())):
+#                     if str(winEnty.timerCount).__len__() == 1:
+#                         tk_r8_timer.set('00:00:0' + str(winEnty.timerCount))
+#                     else:
+#                         tk_r8_timer.set('00:00:' + str(winEnty.timerCount))
+#                     winEnty.timerCount = winEnty.timerCount + 1
+#                 else:
+#                     print('超时', tk_r2_p2.get())
+#                     winEnty.stopFlag = 0
+#                     root.quit()
+#                 time.sleep(1)
+#             elif winEnty.stopFlag == 0:
+#                 time.sleep(1)
+#             elif winEnty.stopFlag == -1:
+#                 break
+#     except Exception as ex:
+#         print(ex)
+
 # def UpdateTestUI():
 #     self.timeOut.set(7877)
+
+# def CreateTimerText():
+#     lbx = tk.Label(frame8, textvariable=tk, justify=tk.LEFT, fg='black', font=("微软雅黑", 13))
+#     lbx.pack(side=tk.LEFT)
+#
+#     btn = tk.Button(frame8, text='startTest', command=StartTestThread, fg='black', font=("微软雅黑", 10))
+#     btn.pack(side=tk.RIGHT)
+# def SetStartTaskFlags():
+#     winEnty.timerCount = 0  # 每一个任务结束完成后timerCount设置为0清空计数
+#     winEnty.stopFlag = 1#开始测试时，stopFlag设置为1开始计数
+#
+# def AllTaskCompled():
+#     winEnty.stopFlag = 0#最终测试完成后，stopFlag设置为0，结束循环
+# def SetViewParams(title, message, row3lbxName, row3Value, row4lbxName, row4Value, row5lbxName, row5Value, row6lbxName, row6Value,row7lbxName, row7Value):
+#     # SetStartTaskFlags()
+#     tk_row1_title.set(title)
+#     tk_row2_message.set(message)
+#     tk_row3_lbxName.set(row3lbxName)
+#     tk_row3_value.set(row3Value)
+#     tk_row4_lbxName.set(row4lbxName)
+#     tk_row4_value.set(row4Value)
+#     tk_row5_lbxName.set(row5lbxName)
+#     tk_row5_value.set(row5Value)
+#     tk_row6_lbxName.set(row6lbxName)
+#     tk_row6_value.set(row6Value)
+#     tk_row7_lbxName.set(row7lbxName)
+#     tk_row7_value.set(row7Value)
 
 def AddOutTimeLabel(self):
     self.lbxTimeout = tk.Label(self.win, text="超时时间(s)", fg='black', font=("微软雅黑", 16))

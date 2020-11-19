@@ -1,3 +1,7 @@
-import TaskWin as tw
+import AutoTestWin as tw
+import time
 
-tw.UpdateLabel()
+tw.ShowMessageBox()
+time.sleep(2)
+print('start second box')
+tw.ShowMessageBox()

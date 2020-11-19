@@ -31,42 +31,42 @@ def UpdateUIParams():#获取参数并设定到界面
     tk_row7_value.set(winEnty.row7_value)
 
 def CreateRow1Title():#创建标题LABEL
-    label = tk.Label(frame1, textvariable = tk_row1_title, justify = tk.LEFT, fg='black', font=("微软雅黑", 12))
+    label = tk.Label(frame1, textvariable = tk_row1_title, justify = tk.LEFT, fg='black', font=("微软雅黑", 14))
     label.pack(side = tk.LEFT)
 
 def CreateRow2Message():#创建消息提示MESSAGE
-    label = tk.Label(frame2, textvariable = tk_row2_message, justify = tk.LEFT, fg='black', font=("微软雅黑", 12))
+    label = tk.Label(frame2, textvariable = tk_row2_message, justify = tk.LEFT, fg='red', font=("微软雅黑", 11))
     label.pack(side = tk.LEFT)
 
 def CreateRow3Params():#创建第1个参数LABEL
-    lbx_p1 = tk.Label(frame3, textvariable = tk_row3_lbxName, justify = tk.CENTER, fg='black', font=("微软雅黑", 12))
+    lbx_p1 = tk.Label(frame3, textvariable = tk_row3_lbxName, justify = tk.CENTER, fg='black', font=("宋体", 12))
     lbx_p1.pack(side = tk.LEFT)
 
-    lbx_p2 = tk.Label(frame3, textvariable=tk_row3_value, justify=tk.RIGHT, fg='blue', font=("微软雅黑", 12))
+    lbx_p2 = tk.Label(frame3, textvariable=tk_row3_value, justify=tk.RIGHT, fg='blue', font=("宋体", 12))
     lbx_p2.pack(side=tk.RIGHT)
 
 def CreateRow4Params():#创建第2个参数LABEL
-    lbx_p1 = tk.Label(frame4, textvariable = tk_row4_lbxName, justify = tk.CENTER, fg='black', font=("微软雅黑", 12))
+    lbx_p1 = tk.Label(frame4, textvariable = tk_row4_lbxName, justify = tk.CENTER, fg='black', font=("宋体", 12))
     lbx_p1.pack(side = tk.LEFT)
-    lbx_p2 = tk.Label(frame4, textvariable=tk_row4_value, justify=tk.RIGHT, fg='blue', font=("微软雅黑", 12))
+    lbx_p2 = tk.Label(frame4, textvariable=tk_row4_value, justify=tk.RIGHT, fg='blue', font=("宋体", 12))
     lbx_p2.pack(side=tk.RIGHT)
 
 def CreateRow5Params():#创建第3个参数LABEL
-    lbx_p1 = tk.Label(frame5, textvariable = tk_row5_lbxName, justify = tk.RIGHT, fg='black', font=("微软雅黑", 12))
+    lbx_p1 = tk.Label(frame5, textvariable = tk_row5_lbxName, justify = tk.RIGHT, fg='black', font=("宋体", 12))
     lbx_p1.pack(side = tk.LEFT)
-    lbx_p2 = tk.Label(frame5, textvariable=tk_row5_value, justify=tk.CENTER, fg='blue', font=("微软雅黑", 12))
+    lbx_p2 = tk.Label(frame5, textvariable=tk_row5_value, justify=tk.CENTER, fg='blue', font=("宋体", 12))
     lbx_p2.pack(side=tk.RIGHT)
 
 def CreateRow6Params():#创建第4个参数LABEL
-    lbx_p1 = tk.Label(frame6, textvariable = tk_row6_lbxName, justify = tk.RIGHT, fg='black', font=("微软雅黑", 12))
+    lbx_p1 = tk.Label(frame6, textvariable = tk_row6_lbxName, justify = tk.RIGHT, fg='black', font=("宋体", 12))
     lbx_p1.pack(side = tk.LEFT)
-    lbx_p2 = tk.Label(frame6, textvariable=tk_row6_value, justify=tk.LEFT, fg='blue', font=("微软雅黑", 12))
+    lbx_p2 = tk.Label(frame6, textvariable=tk_row6_value, justify=tk.LEFT, fg='blue', font=("宋体", 12))
     lbx_p2.pack(side=tk.RIGHT)
 
 def CreateRow7Params():#创建第5参数LABEL
-    lbx_p1 = tk.Label(frame7, textvariable = tk_row7_lbxName, justify = tk.RIGHT, fg='black', font=("微软雅黑", 12))
+    lbx_p1 = tk.Label(frame7, textvariable = tk_row7_lbxName, justify = tk.RIGHT, fg='black', font=("宋体", 12))
     lbx_p1.pack(side = tk.LEFT)
-    lbx_p2 = tk.Label(frame7, textvariable=tk_row7_value, justify=tk.LEFT, fg='blue', font=("微软雅黑", 12))
+    lbx_p2 = tk.Label(frame7, textvariable=tk_row7_value, justify=tk.LEFT, fg='blue', font=("宋体", 12))
     lbx_p2.pack(side=tk.RIGHT)
 
 # def CreateButton():
@@ -110,7 +110,8 @@ class ShowMessageBox:
         self.root.geometry('+%d+%d' % (x, y))
         self.root.title("OBDAutoTest")
 
-        frame1.pack(padx=100, pady=10)
+        # frame1.pack(padx=100, pady=10)
+        frame1.pack(side=tk.TOP, padx=65, fill=tk.BOTH, expand=tk.YES)
         frame2.pack(side=tk.TOP, padx=50, fill=tk.BOTH, expand=tk.YES)
         frame3.pack(side=tk.TOP, padx=50, pady=10, fill=tk.BOTH, expand=tk.YES)
         frame4.pack(side=tk.TOP, padx=50, pady=10, fill=tk.BOTH, expand=tk.YES)
@@ -154,12 +155,16 @@ class ShowMessageBox:
         if self.count <= int(winEnty.timeOut):
             self.root.after(1000, self.refreshUI)
         elif self.count > int(winEnty.timeOut):
-            self.root.destroy()
+            # self.root.destroy()
+            self.CloseForm()
         self.count += 1
+
+    def CloseForm(self):
+        self.root.quit()
 
 def AutoTestFormBox(timeOut, title, message, row1_lbxName, row1_value, row2_lbxName, row2_value, row3_lbxName, row3_value, row4_lbxName, row4_value, row5_lbxName, row5_value):
     UpdateUIEntity(timeOut, title, message, row1_lbxName, row1_value, row2_lbxName, row2_value, row3_lbxName, row3_value, row4_lbxName, row4_value, row5_lbxName, row5_value)
     ShowMessageBox()
 
 #调用
-AutoTestFormBox('4','故障注入测试','当前测试完成', '速度：', '300', '发动机转速：', '49', '汽车速度：', '45', '负荷值：', '6333', '发动机水温：', '100')
+# AutoTestFormBox('4','故障注入测试','当前测试完成', '速度：', '300', '发动机转速：', '49', '汽车速度：', '45', '负荷值：', '6333', '发动机水温：', '100')
