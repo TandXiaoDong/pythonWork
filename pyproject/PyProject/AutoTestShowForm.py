@@ -1,7 +1,7 @@
 import tkinter as tk
-import UIEntity as entity
 import time
 import threading
+import sys
 
 '''
 函数调用说明：
@@ -12,9 +12,28 @@ import threading
 第n行
 目前预定义了5个参数，后续增加参数时自行扩展
 '''
+class UIEntity:
+    timeOut = '10'#界面显示的最大时长（秒）
+    IsStop = False
+    row1_title_info = '测试标题'
+    row2_messageTips = '提示消息'
+    row3_name = '转速'#从第三行开始显示具体的参数与参数值
+    row3_value = '20'
+    row4_name = '发动机转速'
+    row4_value = '40'
+    row5_name = '汽车速度'
+    row5_value = '47'
+    row6_name = '负荷值'
+    row6_value = '28'
+    row7_name = '发动机水温'
+    row7_value = '67'
+    row8_name = '发动机'
+    row8_value = '67'
+    row9_name = 'name9'
+    row9_value = 'value9'
 
 global winEnty #实体类，用于存储界面显示的参数名称与参数值
-winEnty = entity.UIEntity()
+winEnty = UIEntity()
 
 def UpdateUIParams():#获取参数并设定到界面
     tk_row1_title.set(winEnty.row1_title_info)
@@ -72,21 +91,6 @@ def CreateRow7Params():#创建第5参数LABEL
 # def CreateButton():
 #     btn = tk.Button(frame7, text='startTest', command=StartTestThread, fg='black', font=("微软雅黑", 10))
 #     btn.pack()
-
-def UpdateUIEntity(timeOut, title, message, row3lbxName, row3Value, row4lbxName, row4Value, row5lbxName, row5Value, row6lbxName, row6Value,row7lbxName, row7Value):
-    winEnty.timeOut = timeOut
-    winEnty.row1_title_info = title
-    winEnty.row2_messageTips = message
-    winEnty.row3_name = row3lbxName
-    winEnty.row3_value = row3Value
-    winEnty.row4_name = row4lbxName
-    winEnty.row4_value = row4Value
-    winEnty.row5_name = row5lbxName
-    winEnty.row5_value = row5Value
-    winEnty.row6_name = row6lbxName
-    winEnty.row6_value = row6Value
-    winEnty.row7_name = row7lbxName
-    winEnty.row7_value = row7Value
 
 class ShowMessageBox:
     def __init__(self):
@@ -151,20 +155,40 @@ class ShowMessageBox:
         self.refreshUI()
         self.root.mainloop()
 
+    # def refreshUI(self):
+    #     if self.count <= int(winEnty.timeOut):
+    #         root.after(1000, self.refreshUI)
+    #     elif self.count > int(winEnty.timeOut):
+    #         # self.root.destroy()
+    #         Close()
+    #     self.count += 1
+
     def refreshUI(self):
-        if self.count <= int(winEnty.timeOut):
+        if winEnty.IsStop == False:
             self.root.after(1000, self.refreshUI)
-        elif self.count > int(winEnty.timeOut):
-            # self.root.destroy()
-            self.CloseForm()
-        self.count += 1
+        elif winEnty.IsStop == True:
+            self.root.destroy()
 
     def CloseForm(self):
-        self.root.quit()
+        self.root.destroy()
 
-def AutoTestFormBox(timeOut, title, message, row1_lbxName, row1_value, row2_lbxName, row2_value, row3_lbxName, row3_value, row4_lbxName, row4_value, row5_lbxName, row5_value):
-    UpdateUIEntity(timeOut, title, message, row1_lbxName, row1_value, row2_lbxName, row2_value, row3_lbxName, row3_value, row4_lbxName, row4_value, row5_lbxName, row5_value)
+def ShowTestFormBox():
     ShowMessageBox()
 
-#调用
-# AutoTestFormBox('4','故障注入测试','当前测试完成', '速度：', '300', '发动机转速：', '49', '汽车速度：', '45', '负荷值：', '6333', '发动机水温：', '100')
+def UpdateShowParams(timeOut, title, message, row3lbxName, row3Value, row4lbxName, row4Value, row5lbxName, row5Value, row6lbxName, row6Value,row7lbxName, row7Value):
+    winEnty.timeOut = timeOut
+    winEnty.row1_title_info = title
+    winEnty.row2_messageTips = message
+    winEnty.row3_name = row3lbxName
+    winEnty.row3_value = row3Value
+    winEnty.row4_name = row4lbxName
+    winEnty.row4_value = row4Value
+    winEnty.row5_name = row5lbxName
+    winEnty.row5_value = row5Value
+    winEnty.row6_name = row6lbxName
+    winEnty.row6_value = row6Value
+    winEnty.row7_name = row7lbxName
+    winEnty.row7_value = row7Value
+    winEnty.IsStop = False
+def CloseForm():
+    winEnty.IsStop = True

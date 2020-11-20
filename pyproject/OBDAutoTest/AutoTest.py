@@ -430,8 +430,8 @@ def TestOBD():
         # ReadCANFault()
         time.sleep(0.1)
 # TestOBD()
-ReadMode7()
-# MainAutoTestTask()
+# ReadMode7()
+MainAutoTestTask()
 CloseCAN()
 
 

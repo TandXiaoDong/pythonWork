@@ -1,5 +1,6 @@
 class UIEntity:
     timeOut = '10'#界面显示的最大时长（秒）
+    IsStop = False
     row1_title_info = '测试标题'
     row2_messageTips = '提示消息'
     row3_name = '转速'#从第三行开始显示具体的参数与参数值

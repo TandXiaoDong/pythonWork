@@ -2,25 +2,54 @@ import AutoTestShowForm as tsForm
 import  threading
 import time
 
-#调用
-def OpenForm():
-    tsForm.AutoTestFormBox('15','故障注入测试1','当前测试完成,五秒钟后进入下一项测试', '速度1：', '300', '发动机转速1：', '49', '汽车速度1：', '45', '负荷值1：', '6333', '发动机水温1：', '100')
+'''
+测试流程中显示界面的操作DEMO：
+1）创建两个并行任务：测试流程任务、窗体显示任务
+2）可在测试任务中控制窗体的显示与关闭
+    窗体显示：如以下示例传入参数，显示并更新界面
+    窗体关闭：调用CloseForm函数关闭窗体
+'''
+def AutoTestTask():
+    try:
+        tsForm.CloseForm()
+        for i in range(3):
+            time.sleep(1)
+            print('print', i)
+        print('界面显示：')
+        tsForm.UpdateShowParams('4','故障注入测试1','当前测试完成1', '速度：', '300', '发动机转速：', '49', '汽车速度：', '45', '负荷值：', '6333', '发动机水温：', '100')
+        for i in range(3):
+            time.sleep(1)
+            print('print', i)
+        tsForm.CloseForm()
+        print('界面关闭')
+        for i in range(3):
+            time.sleep(1)
+            print('print', i)
+        print('界面显示：')
+        tsForm.UpdateShowParams('4', '故障注入测试2', '当前测试完成2', '速度：', '34300', '发动机转速：', '449', '汽车速度：', '455', '负荷值：', '633',
+                                '发动机水温：', '10450')
+        for i in range(3):
+            time.sleep(1)
+            print('print', i)
+        tsForm.CloseForm()
+        print('界面关闭')
+        print('所有测试结束...')
+    except Exception as ex:
+        print('err:', ex)
 
-# tsForm.AutoTestFormBox('6','故障注入测试2','当前测试完成', '速度2：', '300', '发动机转速2：', '49', '汽车速度2：', '45', '负荷值2：', '6333', '发动机水温2：', '100')
-def Process():
-    for i in range(5):
-        time.sleep(1)
-        print('count:', i)
-    tsForm.ShowMessageBox().CloseForm()
+def ShowWindowTask():
+    while True:
+        if tsForm.winEnty.IsStop != True:
+            tsForm.ShowTestFormBox()
 
-# OpenForm()
-# Process()
-t1 = threading.Thread(target=OpenForm)
-t1.daemon = True
-t1.start()
-#
-t2 = threading.Thread(target=Process)
-t2.daemon = True
-t2.start()
+def MainAutoTestTask():#创建两个并行任务，处理测试流程任务、窗体显示任务
+    task1 = threading.Thread(target=AutoTestTask)
+    task1.start()
+    task2 = threading.Thread(target=ShowWindowTask)
+    task2.start()
+
+MainAutoTestTask()
+
+
 
 
